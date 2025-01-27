@@ -1,55 +1,52 @@
-//1. Funciones matemáticas
-function suma(a,b){
-    return a + b;
-}
-function resta(a,b){
-    return a - b;
-}
-function multiplicacion(a,b){
-    return a * b;
-}
-function division(a,b){
-    if(b == 0){
-        alert("No se puede dividir entre cero.")
-    }else {
-        return a / b;
+const display = document.querySelector('.display input'); // Pantalla de la calculadora
+const numberButtons = document.querySelectorAll('.btn-numbers button'); // 0-9
+const operatorButtons = document.querySelectorAll('.btn-operators button'); // +, -, *, /
+const clearAllButton = document.querySelector('.btn-clear button:nth-child(1)'); // AC
+const deleteButton = document.querySelector('.btn-clear button:nth-child(2)'); // DE
+const equalButton = document.querySelector('.btn-operators button:last-child'); // =
+
+numberButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        display.value += button.textContent.trim();
+    });
+}); // Agregar el número al display
+
+operatorButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const lastChar = display.value.slice(-1);
+        const operators = ['+', '-', '*', '/'];
+        
+        if (display.value && !operators.includes(lastChar)) {
+            display.value += button.textContent.trim();
+        }
+    });
+}); // Agregar el operador al display
+
+clearAllButton.addEventListener("click", () => {
+    display.value = '';
+}); // Limpiar el display AC
+
+deleteButton.addEventListener("click", () => {
+    display.value = display.value.slice(0, -1);
+}); // Borrar el último caracter DE
+
+equalButton.addEventListener('click', () => {
+    try {
+        const result = evaluateExpression(display.value);
+        if (result === Infinity || result === -Infinity || isNaN(result)) {
+            display.value = 'Error';
+        } else {
+            display.value = result;
+        }
+    } catch {
+        display.value = 'Error';
     }
+}); // Calcular el resultado = 
+
+function evaluateExpression(expression) {
+    // Reemplaza los operadores para evitar problemas de seguridad
+    const sanitizedExpression = expression.replace(/[^-()\d/*+.]/g, '');
+    return Function(`'use strict'; return (${sanitizedExpression})`)();
 }
 
-//3. Pedir números y operador al usuario
-function solicitarDatosYCalcular() {
-    
-    const num1 = parseInt(prompt("Ingrese el primer número:"));
-    const num2 = parseInt(prompt("Ingrese el segundo número:"));
-    const operador = prompt("Ingrese el operador (+, -, *, /):");
 
-    if (isNaN(num1) || isNaN(num2)) {
-        alert("Valores ingresados no son números");
-        return;
-    }
-    
-    const resultado = calculadora(num1, num2, operador);
-
-    console.log(`El resultado de ${num1} ${operador} ${num2} es: ${resultado}`);
-
-
-}
-
-//2. Función calculadora
-function calculadora (a , b, operador){
-    
-    switch(operador){
-        case "+":
-            return suma(a,b);
-        case "-":
-            return resta(a,b);
-        case "*":
-            return multiplicacion(a,b);
-        case "/":
-            return division(a,b);
-        default:
-            alert("Ingrese un operador aritmético valido. (+,-,*,/)");
-    }
-}
-
-solicitarDatosYCalcular();

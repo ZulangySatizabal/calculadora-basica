@@ -23,7 +23,7 @@ body{
 
 .calculator{
     width: 350px;
-    height: 500px;  
+    height: 550px;  
     margin: 40px auto;
     background-color: #022932;
     border-radius: 30px;
@@ -34,14 +34,21 @@ body{
 .display{
     grid-row: 1;
     background-color: #01161E;
-    padding: 50px 20px 25px;
+    padding: 40px 20px 10px;
     border-radius: 15px;
     margin-bottom: 10px;
+}
+.display input {
+    width: 100%;
+    height: 50px;
+    background-color: #01161E;
+    border: none;
+    outline: none;
     font-family: 'Digital7', sans-serif;
     font-size: 3em;
     text-align: right;
     color: #00ff00;
-
+    box-sizing: border-box;
 }
 
 button{
@@ -49,20 +56,15 @@ button{
     font-weight: 700;
     font-style: normal;
     font-size: 1.3rem;
-
-    cursor: pointer;
-    
+    cursor: pointer;    
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: none;
-
     box-shadow: 2px 2px 5px #013844, -2px -2px 5px #044A56;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-
     background-color: #022932; 
     color: #EAF4F4; 
-
 }
 
 button:hover {
@@ -70,20 +72,51 @@ button:hover {
     background-color: #033D47;
     box-shadow: 2px 2px 5px #013844, -2px -2px 5px #044A56;
 }
-
 button:active {
     transform: translateY(1px); /* Simula presión */
     background-color: #013844;
     box-shadow: 0px 1px 2px 0px #ccc;
-    
 }
 
 .buttons{
-    grid-template-columns: 3fr 1fr; /* 3 partes para los números, 1 parte para los operadores */
-    padding: 20px;
     display: grid;
-    gap: 30px;  
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 3fr 1fr; /* 3 partes para los números, 1 parte para los operadores */
     height: 310px;
+    padding: 20px;
+    gap: 30px;  
+}
+
+.btn-clear {
+    grid-column: span 2; /* Ocupa ambas columnas */
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+.btn-clear button {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    background-color: #022932;
+    color: #EAF4F4;
+    border: none;
+    box-shadow: 2px 2px 5px #013844, -2px -2px 5px #044A56;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.btn-clear button:hover {
+    transform: translateY(-2px);
+    background-color: #044A56;
+    box-shadow: 2px 2px 5px #013844, -2px -2px 5px #044A56;
+}
+.btn-clear button:active {
+    transform: translateY(1px); /* Simula presión */
+    background-color: #013844;
+    box-shadow: 0px 1px 2px 0px #ccc;
+}
+
+#ac{
+    background-color: #d63031;
 }
 
 .btn-numbers{
