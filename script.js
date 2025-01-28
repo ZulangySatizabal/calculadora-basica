@@ -49,4 +49,55 @@ function evaluateExpression(expression) {
     return Function(`'use strict'; return (${sanitizedExpression})`)();
 }
 
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    const operators = ['+', '-', '*', '/'];
 
+    if (!isNaN(key)) {
+        // Si la tecla es un número
+        display.value += key;
+    } else if (operators.includes(key)) {
+        // Si la tecla es un operador
+        const lastChar = display.value.slice(-1);
+        if (display.value && !operators.includes(lastChar)) {
+            display.value += key;
+        }
+    } else if (key === 'Enter') {
+        // Si la tecla es Enter
+        try {
+            const result = evaluateExpression(display.value);
+            if (result === Infinity || result === -Infinity || isNaN(result)) {
+                display.value = 'Error';
+            } else {
+                display.value = result;
+            }
+        } catch {
+            display.value = 'Error';
+        }
+    } else if (key === 'Backspace') {
+        // Si la tecla es Backspace
+        display.value = display.value.slice(0, -1);
+    } else if (key === 'Escape') {
+        // Si la tecla es Escape
+        display.value = '';
+    }
+});
+
+equalButton.addEventListener('click', () => {
+    try {
+        const result = evaluateExpression(display.value);
+        if (result === Infinity || result === -Infinity || isNaN(result)) {
+            display.value = 'Error';
+        } else {
+            display.value = result;
+        }
+    } catch {
+        display.value = 'Error';
+    }
+});
+
+function evaluateExpression(expression) {
+    // Reemplaza los operadores para evitar problemas de seguridad
+    const sanitizedExpression = expression.replace(/[^-()\d/*+.]/g, '');
+    return Function(`'use strict'; return (${sanitizedExpression})`)();
+}
