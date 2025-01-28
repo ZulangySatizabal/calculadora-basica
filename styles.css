@@ -19,12 +19,17 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    padding: 20px;
 }
 
 .calculator{
     width: 350px;
     height: 550px;  
-    margin: 40px auto;
+    margin: 0;
     background-color: #022932;
     border-radius: 30px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
@@ -137,3 +142,46 @@ button:active {
     gap: 10px;
     width: 50px;
 }
+
+
+/* credits */
+
+.credits-container {
+    /* width: 100%; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.credits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    padding: 25px;
+    margin: 20px;
+    text-align: center;
+    color: #eee;
+    transition: transform 0.2s ease-in-out, box-shadow 0.5s ease;
+}
+
+.credits:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0px 4px 15px rgba(241, 68, 218, 0.3); /* Agrega un efecto de sombra */
+}
+
+.credits p {
+    padding-bottom: 5px;
+}
+.credits a {
+    color: #eee;
+    text-decoration: none;
+}
+.credits a:hover {
+    text-decoration: underline;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+

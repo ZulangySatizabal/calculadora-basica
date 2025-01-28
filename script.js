@@ -5,6 +5,8 @@ const clearAllButton = document.querySelector('.btn-clear button:nth-child(1)');
 const deleteButton = document.querySelector('.btn-clear button:nth-child(2)'); // DE
 const equalButton = document.querySelector('.btn-operators button:last-child'); // =
 
+/* ------ Botones de la interfaz ------ */
+
 numberButtons.forEach(button => {
     button.addEventListener("click", () => {
         display.value += button.textContent.trim();
@@ -28,7 +30,7 @@ clearAllButton.addEventListener("click", () => {
 
 deleteButton.addEventListener("click", () => {
     display.value = display.value.slice(0, -1);
-}); // Borrar el último caracter DE
+}); // Borrar el último carácter DE
 
 equalButton.addEventListener('click', () => {
     try {
@@ -47,7 +49,9 @@ function evaluateExpression(expression) {
     // Reemplaza los operadores para evitar problemas de seguridad
     const sanitizedExpression = expression.replace(/[^-()\d/*+.]/g, '');
     return Function(`'use strict'; return (${sanitizedExpression})`)();
-}
+} // Evaluar la expresión matemática
+
+/* ------ MAnejo del teclado ------ */
 
 document.addEventListener('keydown', (event) => {
     const key = event.key;
@@ -81,7 +85,7 @@ document.addEventListener('keydown', (event) => {
         // Si la tecla es Escape
         display.value = '';
     }
-});
+}); // Eventos del teclado
 
 equalButton.addEventListener('click', () => {
     try {
@@ -94,10 +98,10 @@ equalButton.addEventListener('click', () => {
     } catch {
         display.value = 'Error';
     }
-});
+}); // Calcular el resultado =
 
 function evaluateExpression(expression) {
     // Reemplaza los operadores para evitar problemas de seguridad
     const sanitizedExpression = expression.replace(/[^-()\d/*+.]/g, '');
     return Function(`'use strict'; return (${sanitizedExpression})`)();
-}
+} // Evaluar la expresión matemática
